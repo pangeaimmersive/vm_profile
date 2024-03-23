@@ -62,7 +62,7 @@ if(-not `$ConnectedToTheInternet){
         #Install-WindowsUpdate -AcceptAll -Download
 
         Start-Sleep -Seconds 5
-        Write-Host `"`nPlease restart PowerShell`" -ForegroundColor Yellow
+        Write-Host `"``nPlease restart PowerShell`" -ForegroundColor Yellow
       }
     
     #endregion --------------------------------
