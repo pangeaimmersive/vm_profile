@@ -58,10 +58,10 @@ if(-not `$ConnectedToTheInternet){
         Install-PackageProvider -Name NuGet -Force | Out-Null
         Set-PSRepository -Name PSGallery -InstallationPolicy Trusted | Out-Null
 
-        Start-Sleep -Seconds 10
-        #Install-Module -Name PSWindowsUpdate -Force
+        Install-Module -Name PSWindowsUpdate -Force
         #Install-WindowsUpdate -AcceptAll -Download
 
+        Start-Sleep -Seconds 7
         Write-Host `"`nPlease restart PowerShell`" -ForegroundColor Yellow
       }
     
