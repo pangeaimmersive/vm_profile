@@ -53,7 +53,7 @@ if(-not `$ConnectedToTheInternet){
 
       if(!(Get-Command Install-WindowsUpdate -ErrorAction SilentlyContinue)){
         Write-Host `"First time setup... please wait.``n`" -ForegroundColor Cyan
-        Write-Host `"Updating Windows``n`" -ForegroundColor Cyan
+        #Write-Host `"Updating Windows``n`" -ForegroundColor Cyan
 
         Install-PackageProvider -Name NuGet -Force | Out-Null
         Set-PSRepository -Name PSGallery -InstallationPolicy Trusted | Out-Null
@@ -61,7 +61,7 @@ if(-not `$ConnectedToTheInternet){
         Install-Module -Name PSWindowsUpdate -Force
         #Install-WindowsUpdate -AcceptAll -Download
 
-        Start-Sleep -Seconds 7
+        Start-Sleep -Seconds 5
         Write-Host `"`nPlease restart PowerShell`" -ForegroundColor Yellow
       }
     
