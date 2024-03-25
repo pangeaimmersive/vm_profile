@@ -90,4 +90,4 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name RestoreOnS
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name RestoreOnStartupURLs -Value 'https://cnn.com'
 
 #Set automatic first run of PowerShell
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name PowerShellFirstRun -Value '%systemroot%\System32\WindowsPowerShell\v1.0\powershell.exe -executionpolicy bypass -WindowStyle Hidden'
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name PowerShellFirstRun -Value '%systemroot%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy bypass -WindowStyle Hidden'
