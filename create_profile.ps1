@@ -73,4 +73,9 @@ if(-not `$ConnectedToTheInternet){
 cd\
 "
 
+#Set system wide PowerShell profile
 New-Item -Path "$PSHOME\profile.ps1" -ItemType File -Value $Content
+
+#Disable the "First Run" page on Microsoft Edge
+New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name HideFirstRunExperience -Value 1
