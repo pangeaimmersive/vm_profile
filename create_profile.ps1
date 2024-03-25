@@ -51,17 +51,22 @@ if(-not `$ConnectedToTheInternet){
 
     #region ------ Update Windows -------------
 
-      if(!(Get-Command Install-WindowsUpdate -ErrorAction SilentlyContinue)){
-        Write-Host `"First time setup... please wait.``n`" -ForegroundColor Cyan
-        Write-Host `"Updating Windows``n`" -ForegroundColor Cyan
+      if(!(Test-Path -Path "$env:TEMP\FirstTimeSetupHasRun.txt")){
+        New-item -Path "$env:TEMP\FirstTimeSetupHasRun.txt" -ItemType File | Out-Null
+        
+        if(!(Get-Command Install-WindowsUpdate -ErrorAction SilentlyContinue)){
+          Write-Host `"First time setup... please wait.``n`" -ForegroundColor Cyan
+          Write-Host `"Updating Windows``n`" -ForegroundColor Cyan
 
-        Install-PackageProvider -Name NuGet -Force | Out-Null
-        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted | Out-Null
+          Install-PackageProvider -Name NuGet -Force | Out-Null
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted | Out-Null
 
-        Install-Module -Name PSWindowsUpdate -Force
-        Install-WindowsUpdate -AcceptAll -Download
+          Install-Module -Name PSWindowsUpdate -Force
+          Install-WindowsUpdate -AcceptAll -Download
 
-        Write-Host `"``nPlease restart PowerShell`" -ForegroundColor Yellow
+          Write-Host `"``nPlease restart PowerShell`" -ForegroundColor Yellow
+        }
+        
       }
     
     #endregion --------------------------------
@@ -75,16 +80,21 @@ cd\
 #Set system wide PowerShell profile
 New-Item -Path "$PSHOME\profile.ps1" -ItemType File -Value $Content
 
-#Disable the "First Run" page & Remove homepage fluff from Microsoft Edge
-New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge"
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name HideFirstRunExperience -Value 1
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name NewTabPageAllowedBackgroundTypes -Value 3
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name NewTabPageAppLauncherEnabled -Value 0
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name NewTabPageContentEnabled -Value 0
 
-#Do not open Server Manager at logon
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ServerManager" -Name DoNotOpenServerManagerAtLogon -Value 1
-New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Network\NewNetworkWindowOff"
+#region --- Configure System settings via the Registry ---
 
-#Set automatic first run of PowerShell
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name PowerShellFirstRun -Value 'C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle Hidden'
+  #Disable the "First Run" page & Remove homepage fluff from Microsoft Edge
+  New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge"
+  Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name HideFirstRunExperience -Value 1
+  Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name NewTabPageAllowedBackgroundTypes -Value 3
+  Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name NewTabPageAppLauncherEnabled -Value 0
+  Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name NewTabPageContentEnabled -Value 0
+
+  #Do not open Server Manager at logon
+  Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ServerManager" -Name DoNotOpenServerManagerAtLogon -Value 1
+  New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Network\NewNetworkWindowOff"
+
+  #Set automatic first run of PowerShell
+  Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name PowerShellFirstRun -Value 'C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle Hidden'
+
+#endregion --------------------------------
