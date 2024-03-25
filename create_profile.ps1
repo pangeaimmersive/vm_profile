@@ -81,7 +81,7 @@ cd\
 New-Item -Path "$PSHOME\profile.ps1" -ItemType File -Value $Content
 
 
-#region --- Configure Azure server settings via the Registry ---
+#region --- Configure Azure VM settings via the registry ---
 
   #Disable the "First Run" page & Remove homepage fluff from Microsoft Edge
   New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge"
@@ -97,4 +97,4 @@ New-Item -Path "$PSHOME\profile.ps1" -ItemType File -Value $Content
   #Set automatic first run of PowerShell
   Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name PowerShellFirstRun -Value 'C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle Hidden'
 
-#endregion -----------------------------------------------------
+#endregion -------------------------------------------------
