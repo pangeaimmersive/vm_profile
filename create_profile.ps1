@@ -84,4 +84,4 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name NewTabPage
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name NewTabPageContentEnabled -Value 0
 
 #Set automatic first run of PowerShell
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name PowerShellFirstRun -Value 'C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy bypass -WindowStyle Hidden -File "$PSHOME\profile.ps1"'
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name PowerShellFirstRun -Value 'C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle Hidden -File "$PSHOME\profile.ps1"' #-ExecutionPolicy bypass
