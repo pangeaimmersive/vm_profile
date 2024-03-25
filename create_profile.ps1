@@ -51,8 +51,8 @@ if(-not `$ConnectedToTheInternet){
 
     #region ------ Update Windows -------------
 
-      if(!(Test-Path -Path "$env:TEMP\FirstTimeSetupHasRun.txt")){
-        New-item -Path "$env:TEMP\FirstTimeSetupHasRun.txt" -ItemType File | Out-Null
+      if(!(Test-Path -Path `"`$env:TEMP\FirstTimeSetupHasRun.txt`")){
+        New-item -Path `"`$env:TEMP\FirstTimeSetupHasRun.txt`" -ItemType File | Out-Null
         
         if(!(Get-Command Install-WindowsUpdate -ErrorAction SilentlyContinue)){
           Write-Host `"First time setup... please wait.``n`" -ForegroundColor Cyan
