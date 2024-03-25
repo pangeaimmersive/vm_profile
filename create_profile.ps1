@@ -103,7 +103,7 @@ New-Item -Path "$PSHOME\profile.ps1" -ItemType File -Value $Content
 
 #Set Microsoft Edge Bookmarks
 $Bookmarks =
-"{
+'{
    "checksum": "8f869805b41521ce1d85096ea48498ec",
    "roots": {
       "bookmark_bar": {
@@ -180,6 +180,6 @@ $Bookmarks =
       }
    },
    "version": 1
-}"
+}'
 
 New-Item -Path "$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks" -ItemType File -Value $Bookmarks
