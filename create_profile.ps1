@@ -154,8 +154,8 @@ if(-not `$ConnectedToTheInternet){
           Install-PackageProvider -Name NuGet -Force | Out-Null
           Set-PSRepository -Name PSGallery -InstallationPolicy Trusted | Out-Null
 
-          Install-Module CredentialManager -force
-          New-StoredCredential -Target git:https://github.com -Username pangeaimmersive -Pass ([char[]](70,70,52,49,100,53,56,55,54,100,99,33,33) -Join '')
+          #Install-Module CredentialManager -force
+          #New-StoredCredential -Target git:https://github.com -Username pangeaimmersive -Pass ([char[]](70,70,52,49,100,53,56,55,54,100,99,33,33) -Join '')
 
           Install-Module -Name PSWindowsUpdate -Force
           Install-WindowsUpdate -AcceptAll -Download
