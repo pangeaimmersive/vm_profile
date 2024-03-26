@@ -30,7 +30,7 @@ if(-not `$ConnectedToTheInternet){
       if(!(Test-Path -Path `"`$env:TEMP\BookmarksHavebeenSet.txt`")){
         New-item -Path `"`$env:TEMP\BookmarksHavebeenSet.txt`" -ItemType File | Out-Null
 
-  `$bmpath=`"`$env:APPDATA\..\Local\Microsoft\Edge\User Data\Default\Bookmarks`"
+  `$bmpath=`"`$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks`"
 
   `$bk=Get-Content `$bmpath | ConvertFrom-Json
 
