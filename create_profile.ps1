@@ -32,7 +32,48 @@ if(-not `$ConnectedToTheInternet){
 
   `$bmpath=`"`$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks`"
 
-   if(!(Test-Path -Path `$bmpath)){New-Item -Path `$bmpath -ItemType File}
+  `$BookMarksBaseFile =
+'{
+   `"checksum`": `"f742d7e81917f4c652201ee6b6c6b75f`",
+   `"roots`": {
+      `"bookmark_bar`": {
+         `"children`": [ ],
+         `"date_added`": `"13355962750092032`",
+         `"date_last_used`": `"0`",
+         `"date_modified`": `"13355962766114289`",
+         `"guid`": `"0bc5d13f-2cba-5d74-951f-3f233fe6c908`",
+         `"id`": `"1`",
+         `"name`": `"Favorites bar`",
+         `"source`": `"unknown`",
+         `"type`": `"folder`"
+      },
+      `"other`": {
+         `"children`": [  ],
+         `"date_added`": `"13355962750092034`",
+         `"date_last_used`": `"0`",
+         `"date_modified`": `"0`",
+         `"guid`": `"82b081ec-3dd3-529c-8475-ab6c344590dd`",
+         `"id`": `"6`",
+         `"name`": `"Other favorites`",
+         `"source`": `"unknown`",
+         `"type`": `"folder`"
+      },
+      `"synced`": {
+         `"children`": [  ],
+         `"date_added`": `"13355962750092036`",
+         `"date_last_used`": `"0`",
+         `"date_modified`": `"0`",
+         `"guid`": `"4cf2e351-0e85-532b-bb37-df045d8f8d0f`",
+         `"id`": `"7`",
+         `"name`": `"Mobile favorites`",
+         `"source`": `"unknown`",
+         `"type`": `"folder`"
+      }
+   },
+   `"version`": 1
+}'  
+
+   if(!(Test-Path -Path `$bmpath)){New-Item -Path `$bmpath -ItemType File -Value `$BookMarksBaseFile}
 
   `$bk=Get-Content `$bmpath | ConvertFrom-Json -ErrorAction SilentlyContinue
 
