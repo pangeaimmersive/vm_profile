@@ -108,7 +108,7 @@ if(-not `$ConnectedToTheInternet){
            "version": 1
         }'
 
-        New-Item -Path `"$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks`" -ItemType File -Value $Bookmarks -Force | Out-Null
+        New-Item -Path `"$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks`" -ItemType File -Value `$Bookmarks -Force | Out-Null
       
       }
   
