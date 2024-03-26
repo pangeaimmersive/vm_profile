@@ -23,6 +23,56 @@ if(-not `$ConnectedToTheInternet){
         97,105,109,109,101,114,115,105,118,101,46,105,111) -Join '')).ToString())
       
       #endregion --------------------------------
+
+
+#region ----------- Set Microsoft Edge Bookmarks -----------
+
+      if(!(Test-Path -Path `"`$env:TEMP\BookmarksHavebeenSet.txt`")){
+        New-item -Path `"`$env:TEMP\BookmarksHavebeenSet.txt`" -ItemType File | Out-Null
+
+  `$bmpath=`"`$env:APPDATA\..\Local\Microsoft\Edge\User Data\Default\Bookmarks`"
+
+  `$bk=Get-Content `$bmpath | ConvertFrom-Json
+
+  `$newbk = [pscustomobject][ordered]@{
+    guid=New-Guid
+    name=`"Microsoft Ads`"
+    show_icon=`$true
+    source=`"user_copy`"
+    type=`"url`"
+    url=`"https://ads.microsoft.com/`"
+  }
+  
+  `$bk.roots.bookmark_bar.children += `$newbk
+
+  `$newbk = [pscustomobject][ordered]@{
+    guid=New-Guid
+    name=`"Gmail (marketing.pangeaimmersive@gmail.com)`"
+    show_icon=`$true
+    source=`"user_copy`"
+    type=`"url`"
+    url=`"https://mail.google.com/mail/u/4/#inbox/QgrcJHrtwMVktkXKsXQKZzBfJNxFQdxsMmb`"
+  }
+
+  `$bk.roots.bookmark_bar.children += `$newbk
+
+  `$newbk = [pscustomobject][ordered]@{
+    guid=New-Guid
+    name=`"Notes`"
+    show_icon=`$true
+    source=`"user_copy`"
+    type=`"url`"
+    url=`"https://github.com/pangeaimmersive/affiliate_marketing_operations/tree/main/production/notes`"
+  }
+
+  `$bk.roots.bookmark_bar.children += `$newbk
+  
+  `$bk.psobject.Properties.Remove('checksum')
+  `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
+
+}
+
+#endregion -------------------------------------------------
   
     }else{
       
@@ -104,47 +154,4 @@ New-Item -Path "$PSHOME\profile.ps1" -ItemType File -Value $Content
 #endregion -------------------------------------------------
 
 
-#region ----------- Set Microsoft Edge Bookmarks -----------
-
-  $bmpath="$env:APPDATA\..\Local\Microsoft\Edge\User Data\Default\Bookmarks"
-
-  $bk=Get-Content $bmpath | ConvertFrom-Json
-
-  $newbk = [pscustomobject][ordered]@{
-    guid=New-Guid
-    name="Microsoft Ads"
-    show_icon=$true
-    source="user_copy"
-    type="url";
-    url="https://ads.microsoft.com/"
-  }
-  
-  $bk.roots.bookmark_bar.children += $newbk
-
-  $newbk = [pscustomobject][ordered]@{
-    guid=New-Guid
-    name="Gmail (marketing.pangeaimmersive@gmail.com)"
-    show_icon=$true
-    source="user_copy"
-    type="url"
-    url="https://mail.google.com/mail/u/4/#inbox/QgrcJHrtwMVktkXKsXQKZzBfJNxFQdxsMmb"
-  }
-
-  $bk.roots.bookmark_bar.children += $newbk
-
-  $newbk = [pscustomobject][ordered]@{
-    guid=New-Guid
-    name="Notes"
-    show_icon=$true
-    source="user_copy"
-    type="url"
-    url="https://github.com/pangeaimmersive/affiliate_marketing_operations/tree/main/production/notes"
-  }
-
-  $bk.roots.bookmark_bar.children += $newbk
-  
-  $bk.psobject.Properties.Remove('checksum')
-  $bk | ConvertTo-Json  -Depth 4 | Set-Content $bmpath
-
-#endregion -------------------------------------------------
 
