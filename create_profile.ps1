@@ -125,7 +125,15 @@ if(-not `$ConnectedToTheInternet){
         (New-Object Net.WebClient).DownloadFile(`"https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/`$GitExe`", `"`$env:TEMP\`$GitExe`")
         Invoke-Expression `"`$env:TEMP\`$GitExe /VERYSILENT`"
         
-      #endregion -------------------------------- 
+      #endregion --------------------------------
+
+      #region -------- Install Git-Smc ----------
+    
+        `$GHCli = 'gh_2.46.0_windows_amd64.msi'
+        (New-Object Net.WebClient).DownloadFile(`"https://github.com/cli/cli/releases/download/v2.46.0/`$GHCli`", `"`$env:TEMP\`$GHCli`")
+        Invoke-Expression `"Msiexec /i `$env:TEMP\`$GHCli /qn`"
+        
+      #endregion --------------------------------
 
     }
 
