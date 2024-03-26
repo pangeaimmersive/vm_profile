@@ -32,7 +32,9 @@ if(-not `$ConnectedToTheInternet){
 
   `$bmpath=`"`$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks`"
 
-  `$bk=Get-Content `$bmpath | ConvertFrom-Json
+   if(!(Test-Path -Path `$bmpath)){New-Item -Path `$bmpath -ItemType File}
+
+  `$bk=Get-Content `$bmpath | ConvertFrom-Json -ErrorAction SilentlyContinue
 
   `$newbk = [pscustomobject][ordered]@{
     guid=New-Guid
