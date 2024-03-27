@@ -112,7 +112,7 @@ if(-not `$ConnectedToTheInternet){
   
   `$bk.psobject.Properties.Remove('checksum')
 
-  if(!($bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Microsoft Ads')){
+  if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Microsoft Ads')){
     `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
   }
   
