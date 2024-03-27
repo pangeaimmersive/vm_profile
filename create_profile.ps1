@@ -76,7 +76,8 @@ if(-not `$ConnectedToTheInternet){
    if(!(Test-Path -Path `$bmpath)){New-Item -Path `$bmpath -ItemType File -Value `$BookMarksBaseFile | Out-Null}
 
   `$bk=Get-Content `$bmpath | ConvertFrom-Json -ErrorAction SilentlyContinue
-  `$BookmarkCountBefore = `$bk.roots.bookmark_bar.children.Count
+  if($bk.roots.bookmark_bar.children){$HasChildren = $true}
+  if(`$HasChildren){`$BookmarkCountBefore = `$bk.roots.bookmark_bar.children.Count}
 
   `$newbk = [pscustomobject][ordered]@{
     guid=New-Guid
@@ -87,7 +88,11 @@ if(-not `$ConnectedToTheInternet){
     url=`"https://ads.microsoft.com/`"
   }
 
-  if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Microsoft Ads')){
+  if(`$HasChildren){
+    if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Microsoft Ads')){
+      `$bk.roots.bookmark_bar.children += `$newbk
+    }
+  }else{
     `$bk.roots.bookmark_bar.children += `$newbk
   }
 
@@ -100,7 +105,11 @@ if(-not `$ConnectedToTheInternet){
     url=`"https://mail.google.com/mail/u/4/#inbox/QgrcJHrtwMVktkXKsXQKZzBfJNxFQdxsMmb`"
   }
 
-  if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Gmail (marketing.pangeaimmersive@gmail.com)')){
+  if(`$HasChildren){
+    if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Gmail (marketing.pangeaimmersive@gmail.com)')){
+      `$bk.roots.bookmark_bar.children += `$newbk
+    }
+  }else{
     `$bk.roots.bookmark_bar.children += `$newbk
   }
 
@@ -113,13 +122,21 @@ if(-not `$ConnectedToTheInternet){
     url=`"https://github.com/pangeaimmersive/affiliate_marketing_operations/tree/main/production/notes`"
   }
 
-  if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Notes')){
+  if(`$HasChildren){
+    if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Notes')){
+      `$bk.roots.bookmark_bar.children += `$newbk
+    }
+  }else{
     `$bk.roots.bookmark_bar.children += `$newbk
-  }
+  }  
   
   `$bk.psobject.Properties.Remove('checksum')
 
-  if(`$(`$bk.roots.bookmark_bar.children.Count) -ne `$BookmarkCountBefore){
+  if(`$HasChildren){
+    if(`$(`$bk.roots.bookmark_bar.children.Count) -ne `$BookmarkCountBefore){
+      `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
+    }
+  }else{
     `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
   }
 }
