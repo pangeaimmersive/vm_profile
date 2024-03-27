@@ -24,98 +24,93 @@ if(-not `$ConnectedToTheInternet){
       
       #endregion --------------------------------
 
+      if(!(Test-Path -Path `"`$env:TEMP\SetBookmarksHasRun.txt`")){
+        New-item -Path `"`$env:TEMP\SetBookmarksHasRun.txt`" -ItemType File | Out-Null
+        
+        #Set Microsoft Edge Bookmarks
+        `$Bookmarks =
+        '{
+           `"checksum`": `"8f869805b41521ce1d85096ea48498ec`",
+           `"roots`": {
+              `"bookmark_bar`": {
+                 `"children`": [ {
+                    `"date_added`": `"13355882491996907`",
+                    `"date_last_used`": `"0`",
+                    `"guid`": `"b57df2a8-aa82-45a4-93db-d3b9680197ce`",
+                    `"id`": `"7`",
+                    `"meta_info`": {
+                       `"power_bookmark_meta`": `"`"
+                    },
+                    `"name`": `"Microsoft Ads`",
+                    `"show_icon`": false,
+                    `"source`": `"unknown`",
+                    `"type`": `"url`",
+                    `"url`": `"https://ads.microsoft.com/`"
+                 }, {
+                    `"date_added`": `"13355883173243545`",
+                    `"date_last_used`": `"0`",
+                    `"guid`": `"b1e590bb-73a0-4c00-9b31-c17fbc11a8b0`",
+                    `"id`": `"8`",
+                    `"meta_info`": {
+                       `"power_bookmark_meta`": `"`"
+                    },
+                    `"name`": `"Gmail (marketing.pangeaimmersive@gmail.com)`",
+                    `"show_icon`": false,
+                    `"source`": `"unknown`",
+                    `"type`": `"url`",
+                    `"url`": `"https://mail.google.com/mail/u/4/#inbox/QgrcJHrtwMVktkXKsXQKZzBfJNxFQdxsMmb`"
+                 }, {
+                    `"date_added`": `"13355883372076036`",
+                    `"date_last_used`": `"0`",
+                    `"guid`": `"db61dac0-d29e-4a4f-afaa-93f47aecc7eb`",
+                    `"id`": `"11`",
+                    `"meta_info`": {
+                       `"power_bookmark_meta`": `"`"
+                    },
+                    `"name`": `"Notes`",
+                    `"show_icon`": false,
+                    `"source`": `"unknown`",
+                    `"type`": `"url`",
+                    `"url`": `"https://github.com/pangeaimmersive/affiliate_marketing_operations/tree/main/production/notes`"
+                 } ],
+                 `"date_added`": `"13355882457184478`",
+                 `"date_last_used`": `"0`",
+                 `"date_modified`": `"13355883372076036`",
+                 `"guid`": `"0bc5d13f-2cba-5d74-951f-3f233fe6c908`",
+                 `"id`": `"1`",
+                 `"name`": `"Favorites bar`",
+                 `"source`": `"unknown`",
+                 `"type`": `"folder`"
+              },
+              `"other`": {
+                 `"children`": [  ],
+                 `"date_added`": `"13355882457184480`",
+                 `"date_last_used`": `"0`",
+                 `"date_modified`": `"0`",
+                 `"guid`": `"82b081ec-3dd3-529c-8475-ab6c344590dd`",
+                 `"id`": `"2`",
+                 `"name`": `"Other favorites`",
+                 `"source`": `"unknown`",
+                 `"type`": `"folder`"
+              },
+              `"synced`": {
+                 `"children`": [  ],
+                 `"date_added`": `"13355882457184482`",
+                 `"date_last_used`": `"0`",
+                 `"date_modified`": `"0`",
+                 `"guid`": `"4cf2e351-0e85-532b-bb37-df045d8f8d0f`",
+                 `"id`": `"3`",
+                 `"name`": `"Mobile favorites`",
+                 `"source`": `"unknown`",
+                 `"type`": `"folder`"
+              }
+           },
+           `"version`": 1
+        }'
 
-# #region ----------- Set Microsoft Edge Bookmarks -----------
-
-#       if(!(Test-Path -Path `"`$env:TEMP\BookmarksHavebeenSet.txt`")){
-#         New-item -Path `"`$env:TEMP\BookmarksHavebeenSet.txt`" -ItemType File | Out-Null
-
-#   `$bmpath=`"`$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks`"
-
-#   `$BookMarksBaseFile =
-# '{
-#    `"checksum`": `"f742d7e81917f4c652201ee6b6c6b75f`",
-#    `"roots`": {
-#       `"bookmark_bar`": {
-#          `"children`": [ ],
-#          `"date_added`": `"13355962750092032`",
-#          `"date_last_used`": `"0`",
-#          `"date_modified`": `"13355962766114289`",
-#          `"guid`": `"0bc5d13f-2cba-5d74-951f-3f233fe6c908`",
-#          `"id`": `"1`",
-#          `"name`": `"Favorites bar`",
-#          `"source`": `"unknown`",
-#          `"type`": `"folder`"
-#       },
-#       `"other`": {
-#          `"children`": [  ],
-#          `"date_added`": `"13355962750092034`",
-#          `"date_last_used`": `"0`",
-#          `"date_modified`": `"0`",
-#          `"guid`": `"82b081ec-3dd3-529c-8475-ab6c344590dd`",
-#          `"id`": `"6`",
-#          `"name`": `"Other favorites`",
-#          `"source`": `"unknown`",
-#          `"type`": `"folder`"
-#       },
-#       `"synced`": {
-#          `"children`": [  ],
-#          `"date_added`": `"13355962750092036`",
-#          `"date_last_used`": `"0`",
-#          `"date_modified`": `"0`",
-#          `"guid`": `"4cf2e351-0e85-532b-bb37-df045d8f8d0f`",
-#          `"id`": `"7`",
-#          `"name`": `"Mobile favorites`",
-#          `"source`": `"unknown`",
-#          `"type`": `"folder`"
-#       }
-#    },
-#    `"version`": 1
-# }'  
-
-#    if(!(Test-Path -Path `$bmpath)){New-Item -Path `$bmpath -ItemType File -Value `$BookMarksBaseFile | Out-Null}
-
-#   `$bk=Get-Content `$bmpath | ConvertFrom-Json -ErrorAction SilentlyContinue
-
-#   `$newbk = [pscustomobject][ordered]@{
-#     guid=New-Guid
-#     name=`"Microsoft Ads`"
-#     show_icon=`$true
-#     source=`"user_copy`"
-#     type=`"url`"
-#     url=`"https://ads.microsoft.com/`"
-#   }
-  
-#   `$bk.roots.bookmark_bar.children += `$newbk
-
-#   `$newbk = [pscustomobject][ordered]@{
-#     guid=New-Guid
-#     name=`"Gmail (marketing.pangeaimmersive@gmail.com)`"
-#     show_icon=`$true
-#     source=`"user_copy`"
-#     type=`"url`"
-#     url=`"https://mail.google.com/mail/u/4/#inbox/QgrcJHrtwMVktkXKsXQKZzBfJNxFQdxsMmb`"
-#   }
-
-#   `$bk.roots.bookmark_bar.children += `$newbk
-
-#   `$newbk = [pscustomobject][ordered]@{
-#     guid=New-Guid
-#     name=`"Notes`"
-#     show_icon=`$true
-#     source=`"user_copy`"
-#     type=`"url`"
-#     url=`"https://github.com/pangeaimmersive/affiliate_marketing_operations/tree/main/production/notes`"
-#   }
-
-#   `$bk.roots.bookmark_bar.children += `$newbk
-  
-#   `$bk.psobject.Properties.Remove('checksum')
-#   `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
-
-# }
-
-# #endregion -------------------------------------------------
+        New-Item -Path `"$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks`" -ItemType File -Value `$Bookmarks -Force | Out-Null
+      
+      }
   
     }else{
       
@@ -127,7 +122,7 @@ if(-not `$ConnectedToTheInternet){
         
       #endregion --------------------------------
 
-      #region -------- Install Git-Smc ----------
+      #region ------- Install Github CLI --------
     
         `$GHCli = 'gh_2.46.0_windows_amd64.msi'
         (New-Object Net.WebClient).DownloadFile(`"https://github.com/cli/cli/releases/download/v2.46.0/`$GHCli`", `"`$env:TEMP\`$GHCli`")
@@ -137,7 +132,7 @@ if(-not `$ConnectedToTheInternet){
 
     }
 
-    #region ----- Create Desktop Shortcut -----
+    #region ----- Create Desktop Shortcuts -----
     
       if(!(Test-Path -Path `"`$Home\Desktop\PowerShell.lnk`")){
         `$WshShell = New-Object -comObject WScript.Shell
@@ -147,9 +142,16 @@ if(-not `$ConnectedToTheInternet){
         `$Shortcut.Save()
       }
   
+      if(!(Test-Path -Path `"`$Home\Desktop\Edge.lnk`")){
+        `$WshShell = New-Object -comObject WScript.Shell
+        `$Shortcut = `$WshShell.CreateShortcut(`"`$Home\Desktop\Edge.lnk`")
+        `$Shortcut.TargetPath = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+        `$Shortcut.Save()
+      }
+
     #endregion --------------------------------
 
-
+    
     #region ------ Update Windows -------------
 
       if(!(Test-Path -Path `"`$env:TEMP\FirstTimeSetupHasRun.txt`")){
@@ -201,99 +203,6 @@ New-Item -Path "$PSHOME\profile.ps1" -ItemType File -Value $Content
 
   #Set automatic first run of PowerShell
   Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name PowerShellFirstRun -Value 'C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle Hidden'
-
-#endregion -------------------------------------------------
-
-
-#region ----------- Set Microsoft Edge Bookmarks -----------
-
-if(!(Test-Path -Path "$env:TEMP\BookmarksHavebeenSet.txt")){
-  New-item -Path "$env:TEMP\BookmarksHavebeenSet.txt" -ItemType File | Out-Null
-
-$bmpath="$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks"
-
-$BookMarksBaseFile =
-'{
-"checksum": "f742d7e81917f4c652201ee6b6c6b75f",
-"roots": {
-"bookmark_bar": {
-   "children": [ ],
-   "date_added": "13355962750092032",
-   "date_last_used": "0",
-   "date_modified": "13355962766114289",
-   "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
-   "id": "1",
-   "name": "Favorites bar",
-   "source": "unknown",
-   "type": "folder"
-},
-"other": {
-   "children": [  ],
-   "date_added": "13355962750092034",
-   "date_last_used": "0",
-   "date_modified": "0",
-   "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
-   "id": "6",
-   "name": "Other favorites",
-   "source": "unknown",
-   "type": "folder"
-},
-"synced": {
-   "children": [  ],
-   "date_added": "13355962750092036",
-   "date_last_used": "0",
-   "date_modified": "0",
-   "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
-   "id": "7",
-   "name": "Mobile favorites",
-   "source": "unknown",
-   "type": "folder"
-}
-},
-"version": 1
-}'  
-
-if(!(Test-Path -Path $bmpath)){New-Item -Path $bmpath -ItemType File -Value $BookMarksBaseFile | Out-Null}
-
-$bk=Get-Content $bmpath | ConvertFrom-Json -ErrorAction SilentlyContinue
-
-$newbk = [pscustomobject][ordered]@{
-guid=New-Guid
-name="Microsoft Ads"
-show_icon=$true
-source="user_copy"
-type="url"
-url="https://ads.microsoft.com/"
-}
-
-$bk.roots.bookmark_bar.children += $newbk
-
-$newbk = [pscustomobject][ordered]@{
-guid=New-Guid
-name="Gmail (marketing.pangeaimmersive@gmail.com)"
-show_icon=$true
-source="user_copy"
-type="url"
-url="https://mail.google.com/mail/u/4/#inbox/QgrcJHrtwMVktkXKsXQKZzBfJNxFQdxsMmb"
-}
-
-$bk.roots.bookmark_bar.children += $newbk
-
-$newbk = [pscustomobject][ordered]@{
-guid=New-Guid
-name="Notes"
-show_icon=$true
-source="user_copy"
-type="url"
-url="https://github.com/pangeaimmersive/affiliate_marketing_operations/tree/main/production/notes"
-}
-
-$bk.roots.bookmark_bar.children += $newbk
-
-$bk.psobject.Properties.Remove('checksum')
-$bk | ConvertTo-Json -Depth 4 | Set-Content $bmpath
-
-}
 
 #endregion -------------------------------------------------
 
