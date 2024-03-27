@@ -99,6 +99,23 @@ if(-not `$ConnectedToTheInternet){
 
   `$newbk = [pscustomobject][ordered]@{
     guid=New-Guid
+    name=`"Google AdSense`"
+    show_icon=`$true
+    source=`"user_copy`"
+    type=`"url`"
+    url=`"https://adsense.google.com`"
+  }
+
+  if(`$HasChildren){
+    if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Google AdSense')){
+      `$bk.roots.bookmark_bar.children += `$newbk
+    }
+  }else{
+    `$bk.roots.bookmark_bar.children += `$newbk
+  }
+
+  `$newbk = [pscustomobject][ordered]@{
+    guid=New-Guid
     name=`"Gmail (marketing.pangeaimmersive@gmail.com)`"
     show_icon=`$true
     source=`"user_copy`"
