@@ -76,7 +76,7 @@ if(-not `$ConnectedToTheInternet){
    if(!(Test-Path -Path `$bmpath)){New-Item -Path `$bmpath -ItemType File -Value `$BookMarksBaseFile | Out-Null}
 
   `$bk=Get-Content `$bmpath | ConvertFrom-Json -ErrorAction SilentlyContinue
-  if($bk.roots.bookmark_bar.children){$HasChildren = $true}
+  if(`$bk.roots.bookmark_bar.children){`$HasChildren = `$true}
   if(`$HasChildren){`$BookmarkCountBefore = `$bk.roots.bookmark_bar.children.Count}
 
   `$newbk = [pscustomobject][ordered]@{
