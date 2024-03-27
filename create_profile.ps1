@@ -27,9 +27,6 @@ if(-not `$ConnectedToTheInternet){
 
 #region ----------- Set Microsoft Edge Bookmarks -----------
 
-      #if(!(Test-Path -Path `"`$env:TEMP\BookmarksHavebeenSet.txt`")){
-        #New-item -Path `"`$env:TEMP\BookmarksHavebeenSet.txt`" -ItemType File | Out-Null
-
   `$bmpath=`"`$HOME\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks`"
 
    if(!(Test-Path -Path `$bmpath)){
@@ -143,7 +140,6 @@ if(-not `$ConnectedToTheInternet){
   }else{
     `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
   }
-#}
 
 #endregion -------------------------------------------------
   
