@@ -119,7 +119,7 @@ if(-not `$ConnectedToTheInternet){
   
   `$bk.psobject.Properties.Remove('checksum')
 
-  if(`$(`$bk.roots.bookmark_bar.children.Count) -ne `$BookmarkCountBefore)
+  if(`$(`$bk.roots.bookmark_bar.children.Count) -ne `$BookmarkCountBefore){
     `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
   }
 }
