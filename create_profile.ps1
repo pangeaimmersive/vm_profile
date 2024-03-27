@@ -85,8 +85,10 @@ if(-not `$ConnectedToTheInternet){
     type=`"url`"
     url=`"https://ads.microsoft.com/`"
   }
-  
-  `$bk.roots.bookmark_bar.children += `$newbk
+
+  if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Microsoft Ads')){
+    `$bk.roots.bookmark_bar.children += `$newbk
+  }
 
   `$newbk = [pscustomobject][ordered]@{
     guid=New-Guid
@@ -97,7 +99,9 @@ if(-not `$ConnectedToTheInternet){
     url=`"https://mail.google.com/mail/u/4/#inbox/QgrcJHrtwMVktkXKsXQKZzBfJNxFQdxsMmb`"
   }
 
-  `$bk.roots.bookmark_bar.children += `$newbk
+  if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Gmail (marketing.pangeaimmersive@gmail.com)')){
+    `$bk.roots.bookmark_bar.children += `$newbk
+  }
 
   `$newbk = [pscustomobject][ordered]@{
     guid=New-Guid
@@ -108,13 +112,12 @@ if(-not `$ConnectedToTheInternet){
     url=`"https://github.com/pangeaimmersive/affiliate_marketing_operations/tree/main/production/notes`"
   }
 
-  `$bk.roots.bookmark_bar.children += `$newbk
+  if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Notes')){
+    `$bk.roots.bookmark_bar.children += `$newbk
+  }
   
   `$bk.psobject.Properties.Remove('checksum')
-
-  if(!(`$bk.roots.bookmark_bar.children | Select-Object -ExpandProperty Name -ErrorAction SilentlyContinue).contains('Microsoft Ads')){
-    `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
-  }
+  `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
   
 }
 
