@@ -76,6 +76,7 @@ if(-not `$ConnectedToTheInternet){
    if(!(Test-Path -Path `$bmpath)){New-Item -Path `$bmpath -ItemType File -Value `$BookMarksBaseFile | Out-Null}
 
   `$bk=Get-Content `$bmpath | ConvertFrom-Json -ErrorAction SilentlyContinue
+  `$BookmarkCountBefore = `$bk.roots.bookmark_bar.children.Count
 
   `$newbk = [pscustomobject][ordered]@{
     guid=New-Guid
@@ -117,8 +118,10 @@ if(-not `$ConnectedToTheInternet){
   }
   
   `$bk.psobject.Properties.Remove('checksum')
-  `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
-  
+
+  if(`$(`$bk.roots.bookmark_bar.children.Count) -ne `$BookmarkCountBefore)
+    `$bk | ConvertTo-Json -Depth 4 | Set-Content `$bmpath
+  }
 }
 
 #endregion -------------------------------------------------
